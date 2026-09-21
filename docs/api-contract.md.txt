@@ -1,0 +1,53 @@
+# NLP API Contract
+
+## Endpoint
+
+POST `/classify`
+
+## Request
+
+```json
+{
+  "text": "maingay ang kapitbahay tuwing gabi"
+}
+
+Response
+{
+  "category": "Noise Complaint",
+  "confidence": 0.87
+}
+
+Error Response
+{
+  "error": "empty_text"
+}
+
+
+This becomes the **shared agreement between Laravel and Python**.
+
+When Sprint 3 arrives, Henry doesn't have to guess what your Python service returns, and you don't have to guess what Laravel expects.
+
+---
+
+# `definition-of-done.md`
+
+```md
+# Definition of Done
+
+A task is Done when:
+
+- Implementation complete
+- Works in intended environment
+- Basic testing performed
+- No blocking errors
+- Integrated with relevant component
+- Reviewed by team
+
+## Sprint 1 Definition of Done
+
+A user can:
+
+1. Log in
+2. Have the system identify their role
+3. Reach the correct dashboard
+4. Use an application connected to MySQL

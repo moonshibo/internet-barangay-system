@@ -1,0 +1,76 @@
+# Sprint 1 Plan
+
+## Sprint Goal
+
+Establish the system foundation by setting up the Laravel application, MySQL database, authentication, role-based access, basic dashboards, and initial NLP dataset preparation.
+
+## Selected Backlog Items
+
+- PB-01a: Citizen registration
+- PB-01b: Citizen login
+- PB-02: Personnel authentication
+- PB-03: Role-based access
+- PB-04: Citizen dashboard
+- PB-05: Personnel dashboard
+- PB-25: Privacy notice + consent
+
+## Task Breakdown
+
+### Henry
+- Initialize Laravel project
+- Configure local development environment
+- Configure Laravel environment
+- Implement citizen registration
+- Implement citizen login
+- Implement personnel authentication
+- Implement logout
+- Connect authentication frontend to backend
+- Connect authentication to database
+- Assist with role-based access
+
+### Marc
+- Configure Git/GitHub workflow
+- Create project README
+- Design initial database schema
+- Create database
+- Create users table
+- Define user roles
+- Create initial database relationships
+- Connect Laravel to MySQL
+- Implement role-based access
+- Implement protected routes
+- Verify role-based redirection
+- Verify citizen/personnel access
+
+### Starween
+- Create base application layout
+- Create login interface
+- Create citizen dashboard
+- Create personnel dashboard
+- Create navigation/components
+- Assist with citizen registration
+- Assist with authentication frontend
+
+### Joemar
+- Insert test records
+- Define initial concern categories
+- Collect sample citizen concerns
+- Label initial dataset
+- Prepare dataset structure
+- Perform Sprint 1 testing
+
+## Known Dependencies
+
+- Laravel must be installed and configured before authentication development.
+- MySQL database configuration must be completed before database-dependent features can be tested.
+- Database schema and user roles must be established before role-based access can be implemented.
+- Authentication must work before role-based dashboard redirection can be verified.
+- Initial concern categories and sample data must be prepared before later NLP development.
+
+## Risks
+
+- Team members may encounter unfamiliar Laravel or Git concepts.
+- Authentication and role-based access may require additional debugging.
+- Database configuration issues may delay development.
+- Team members may modify shared files at the same time, causing merge conflicts.
+- Initial dataset collection and labeling may take longer than expected.

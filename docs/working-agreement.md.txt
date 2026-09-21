@@ -1,0 +1,43 @@
+# Team Working Agreement
+
+## Branch Naming
+
+Use:
+
+`feature/name-short-desc`
+
+Example:
+
+`feature/henry-auth`
+
+Do not push development work directly to `main`.
+
+## Commit Messages
+
+Use:
+
+`[PB-XX] Short description`
+
+Example:
+
+`[PB-01] Add citizen login`
+
+## Daily Check-in
+
+Post in the team GC by 8 PM:
+
+- What I finished
+- What I will work on next
+- Blockers
+
+## Meeting Cadence
+
+- Sprint Planning: Day 1
+- Mid-Sprint Check: Day 7
+- Sprint Review + Retrospective: Day 13 or 14
+
+## Definition of Done
+
+A task follows the team's Definition of Done documented in:
+
+`docs/definition-of-done.md`
