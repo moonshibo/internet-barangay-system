@@ -31,5 +31,5 @@ Route::get('/citizen/dashboard', function () {
 })->middleware(['auth', 'role:citizen']);
 
 Route::get('/personnel/dashboard', function () {
-    return 'Personnel Dashboard';
+    return view('personnel-dashboard');
 })->middleware(['auth', 'role:personnel']);
