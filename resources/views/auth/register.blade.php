@@ -64,6 +64,32 @@
             >
         </div>
 
+        <div>
+            <h2>Privacy Notice</h2>
+
+            <p>
+                By registering, you acknowledge that the information you provide
+                will be collected and processed for the purposes of providing
+                barangay services and managing your account.
+            </p>
+
+            <p>
+                You may contact the barangay regarding questions about the
+                collection and use of your personal information.
+            </p>
+
+            <label>
+                <input
+                    type="checkbox"
+                    name="privacy_consent"
+                    value="1"
+                    {{ old('privacy_consent') ? 'checked' : '' }}
+		      required
+                >
+                I have read and agree to the Privacy Notice.
+            </label>
+        </div>
+
         <button type="submit">Register</button>
     </form>
 
