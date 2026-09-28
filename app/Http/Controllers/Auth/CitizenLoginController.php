@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\Auth;
 class CitizenLoginController extends Controller
 {
     public function create()
-    {
-        return view('auth.login');
-    }
+{
+    return view('login');
+}
 
     public function store(Request $request)
     {

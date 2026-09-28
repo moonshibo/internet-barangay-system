@@ -11,10 +11,9 @@ use Illuminate\Support\Facades\Hash;
 class CitizenRegistrationController extends Controller
 {
     public function create()
-    {
-        return view('auth.register');
-    }
-
+{
+    return view('register');
+}
     public function store(Request $request)
     {
         $validated = $request->validate([

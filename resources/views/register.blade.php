@@ -61,12 +61,15 @@
 
             <form
                 method="POST"
-                action="#"
-                class="login-form"
-            >
-
+                action="{{ route('register') }}"
+                class="login-form">
                 @csrf
-
+			    	
+		@if ($errors->any())
+    		    <div class="login-error">
+        		{{ $errors->first() }}
+	            </div>
+		@endif
 
                 {{-- NAME --}}
                 <div class="form-group">

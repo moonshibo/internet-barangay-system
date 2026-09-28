@@ -56,7 +56,7 @@
 
             <form
                 method="POST"
-                action="{{ route('login.process') }}"
+                action="{{ route('login') }}"
                 class="login-form"
             >
 

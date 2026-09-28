@@ -188,11 +188,15 @@
             Cancel
         </button>
 
-        <button
-            type="button"
-            class="confirm-button">
-            Log Out
-        </button>
+        <form method="POST" action="{{ route('logout') }}">
+    @csrf
+
+    <button
+        type="submit"
+        class="confirm-button">
+        Log Out
+    </button>
+</form>
 
     </div>
 
