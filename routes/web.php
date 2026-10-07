@@ -15,7 +15,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::view('/submit-request', 'citizen.guest-submit-request');
 
+Route::post('/submit-request', [RequestController::class, 'storeGuest']);
 /*
 |--------------------------------------------------------------------------
 | Citizen Authentication
