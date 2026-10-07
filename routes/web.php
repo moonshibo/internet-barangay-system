@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RequestController;
 use App\Http\Controllers\Auth\PersonnelLoginController;
 use App\Http\Controllers\Auth\CitizenLoginController;
 use App\Http\Controllers\Auth\CitizenRegistrationController;
@@ -14,7 +15,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::view('/submit-request', 'citizen.guest-submit-request');
 
+Route::post('/submit-request', [RequestController::class, 'storeGuest']);
 /*
 |--------------------------------------------------------------------------
 | Citizen Authentication
@@ -78,6 +81,9 @@ Route::view('/citizen/dashboard-preview', 'citizen.dashboard')
     ->middleware(['auth', 'role:citizen']);
 
 Route::view('/citizen/submit-request', 'citizen.submit-request')
+->middleware(['auth', 'role:citizen']);
+
+Route::post('/citizen/submit-request', [RequestController::class, 'store'])
     ->middleware(['auth', 'role:citizen']);
 
 Route::view('/citizen/track-request', 'citizen.track-request')
