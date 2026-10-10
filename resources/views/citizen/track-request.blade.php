@@ -33,6 +33,8 @@
             type="text"
             id="requestReference"
             placeholder="Enter request reference number"
+            aria-label="Request reference number"
+            autocomplete="off"
         >
 
         <button type="button" id="trackRequestButton">
@@ -41,12 +43,14 @@
 
     </div>
 
+    <p id="trackingMessage" role="status" aria-live="polite" hidden></p>
+
 </div>
 
 
-<!-- MOCK REQUEST STATUS -->
+<!-- REQUEST STATUS -->
 
-<div class="tracking-status" id="requestStatus">
+<div class="tracking-status" id="requestStatus" hidden>
 
     <div class="status-header">
 
@@ -170,3 +174,40 @@
 </div>
 
 @endsection
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const referenceInput = document.getElementById('requestReference');
+        const trackButton = document.getElementById('trackRequestButton');
+        const message = document.getElementById('trackingMessage');
+        const requestStatus = document.getElementById('requestStatus');
+
+        function trackRequest() {
+            const referenceNumber = referenceInput.value.trim();
+
+            requestStatus.hidden = true;
+            message.hidden = false;
+
+            if (!referenceNumber) {
+                message.textContent =
+                    'Please enter a request reference number.';
+                referenceInput.focus();
+                return;
+            }
+
+            message.textContent =
+                'Reference number entered. Request lookup will be available after backend integration.';
+        }
+
+        trackButton.addEventListener('click', trackRequest);
+
+        referenceInput.addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                trackRequest();
+            }
+        });
+    });
+</script>
+@endpush
