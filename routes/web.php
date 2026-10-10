@@ -89,7 +89,7 @@ Route::post('/citizen/submit-request', [RequestController::class, 'store'])
 Route::view('/citizen/track-request', 'citizen.track-request')
     ->middleware(['auth', 'role:citizen']);
 
-Route::view('/citizen/history', 'citizen.history')
+Route::get('/citizen/history', [RequestController::class, 'history'])
     ->middleware(['auth', 'role:citizen']);
 
 /*
