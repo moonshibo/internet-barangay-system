@@ -22,6 +22,19 @@
         </div>
     @endif
 
+
+@if($errors->any())
+    <div class="alert alert-danger">
+        <strong>Please correct the following errors:</strong>
+        <ul>
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+
     <div class="request-form-card">
 
         <form
@@ -66,6 +79,7 @@
                     name="subject"
                     placeholder="Enter a short title for your concern"
                     value="{{ old('subject') }}"
+		    maxlength="255"
                     required
                 >
             </div>
@@ -77,6 +91,7 @@
                     name="concern_text"
                     rows="6"
                     placeholder="Describe your concern in detail..."
+		    maxlength="5000"
                     required
                 >{{ old('concern_text') }}</textarea>
 
