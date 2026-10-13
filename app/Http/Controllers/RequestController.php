@@ -15,9 +15,13 @@ class RequestController extends Controller
             'concern_text' => ['required', 'string', 'max:5000'],
             'location' => ['nullable', 'string', 'max:255'],
         ]);
+        do {
+            $referenceNumber = 'BRGY-' . now()->format('Ymd') . '-' . strtoupper(Str::random(6));
+        } while (Request::where('reference_number', $referenceNumber)->exists());
 
         Request::create([
             'user_id' => auth()->id(),
+            'reference_number' => $referenceNumber,
             'subject' => $validated['subject'],
             'concern_text' => $validated['concern_text'],
             'location' => $validated['location'] ?? null,
@@ -65,5 +69,26 @@ class RequestController extends Controller
             ->get();
 
         return view('citizen.history', compact('requests'));
+    }
+    public function track(HttpRequest $request)
+    {
+        $validated = $request->validate([
+            'reference_number' => ['required', 'string', 'max:255'],
+        ]);
+
+        $trackedRequest = auth()->user()
+            ->requests()
+            ->where('reference_number', $validated['reference_number'])
+            ->first();
+
+        if (!$trackedRequest) {
+            return back()->withErrors([
+                'reference_number' => 'Request not found. Please check the reference number and try again.',
+            ])->withInput();
+        }
+
+        return view('citizen.track-request', [
+            'trackedRequest' => $trackedRequest,
+        ]);
     }
 }
