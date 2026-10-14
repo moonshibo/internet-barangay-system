@@ -27,11 +27,11 @@
     <div class="request-form-card">
 
         <form
-    id="requestForm"
-    method="POST"
-    action="{{ url('/citizen/submit-request') }}"
->
-    @csrf
+            id="requestForm"
+            method="POST"
+            action="{{ url('/citizen/submit-request') }}"
+        >
+            @csrf
 
             <!-- REQUEST TYPE -->
 
@@ -43,7 +43,7 @@
 
                 <select
                     id="requestType"
-                    name="requestType"
+                    name="category"
                     required
                 >
 

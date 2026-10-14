@@ -11,16 +11,23 @@ class RequestController extends Controller
     public function store(HttpRequest $request)
     {
         $validated = $request->validate([
+            'category' => [
+                'required',
+                'string',
+                'in:infrastructure,sanitation,health,public-safety,documents,other',
+            ],
             'subject' => ['required', 'string', 'max:255'],
             'concern_text' => ['required', 'string', 'max:5000'],
             'location' => ['nullable', 'string', 'max:255'],
         ]);
+
         do {
             $referenceNumber = 'BRGY-' . now()->format('Ymd') . '-' . strtoupper(Str::random(6));
         } while (Request::where('reference_number', $referenceNumber)->exists());
 
         Request::create([
             'user_id' => auth()->id(),
+            'category' => $validated['category'],
             'reference_number' => $referenceNumber,
             'subject' => $validated['subject'],
             'concern_text' => $validated['concern_text'],
@@ -29,8 +36,11 @@ class RequestController extends Controller
         ]);
 
         return redirect('/citizen/submit-request')
-            ->with('success', 'Your concern has been submitted successfully.');
-    }  
+            ->with(
+                'success',
+                'Your concern has been submitted successfully. Your reference number is: ' . $referenceNumber
+            );
+    }
 
     public function storeGuest(HttpRequest $request)
     {
@@ -58,7 +68,10 @@ class RequestController extends Controller
         ]);
 
         return redirect('/submit-request')
-            ->with('success', 'Your concern has been submitted. Your reference number is: ' . $referenceNumber);
+            ->with(
+                'success',
+                'Your concern has been submitted. Your reference number is: ' . $referenceNumber
+            );
     }
 
     public function history()
@@ -70,25 +83,53 @@ class RequestController extends Controller
 
         return view('citizen.history', compact('requests'));
     }
+
     public function track(HttpRequest $request)
     {
-        $validated = $request->validate([
-            'reference_number' => ['required', 'string', 'max:255'],
-        ]);
+        $referenceNumber = trim((string) $request->input('reference_number', ''));
 
-        $trackedRequest = auth()->user()
-            ->requests()
-            ->where('reference_number', $validated['reference_number'])
-            ->first();
+        $trackedRequest = null;
+        $trackingMessage = null;
 
-        if (!$trackedRequest) {
-            return back()->withErrors([
-                'reference_number' => 'Request not found. Please check the reference number and try again.',
-            ])->withInput();
+        if ($referenceNumber !== '') {
+            $request->validate([
+                'reference_number' => ['required', 'string', 'max:255'],
+            ]);
+
+            // Citizens can track only their own requests.
+            $trackedRequest = auth()->user()
+                ->requests()
+                ->where('reference_number', strtoupper($referenceNumber))
+                ->first();
+
+            // Support older references such as REQ-12.
+            if (
+                !$trackedRequest &&
+                preg_match('/^REQ-(\d+)$/i', $referenceNumber, $matches)
+            ) {
+                $trackedRequest = auth()->user()
+                    ->requests()
+                    ->whereKey((int) $matches[1])
+                    ->first();
+            }
+
+            if (!$trackedRequest) {
+    if ($request->isMethod('post')) {
+        return redirect('/citizen/track-request')
+            ->withErrors([
+                'reference_number' => 'No request was found for that reference number. Check the number and try again.',
+            ])
+            ->withInput();
+    }
+
+    $trackingMessage = 'No request was found for that reference number. Check the number and try again.';
+}
         }
 
-        return view('citizen.track-request', [
-            'trackedRequest' => $trackedRequest,
-        ]);
+        return view('citizen.track-request', compact(
+            'trackedRequest',
+            'trackingMessage',
+            'referenceNumber'
+        ));
     }
 }
