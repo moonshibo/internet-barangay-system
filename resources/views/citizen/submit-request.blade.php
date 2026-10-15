@@ -33,6 +33,21 @@
         >
             @csrf
 
+            @if ($errors->any())
+                <div class="validation-notice" role="alert" aria-live="polite">
+                    <strong>
+                        <span aria-hidden="true">⚠</span>
+                        Your request could not be submitted.
+                    </strong>
+
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <!-- REQUEST TYPE -->
 
             <div class="form-group">
@@ -93,8 +108,18 @@
                     id="subject"
                     name="subject"
                     placeholder="Enter a short title for your concern"
+                    maxlength="255"
+                    value="{{ old('subject') }}"
                     required
                 >
+
+                <small id="subjectCounter" class="form-help" aria-live="polite">
+                    0/255 characters
+                </small>
+
+                @error('subject')
+                    <small class="field-error">{{ $message }}</small>
+                @enderror
 
             </div>
 
@@ -111,14 +136,23 @@
                     id="description"
                     name="concern_text"
                     rows="6"
+                    maxlength="5000"
                     placeholder="Describe your concern in detail..."
                     required
-                ></textarea>
+                    >{{ old('concern_text') }}</textarea>
+
+                <small id="descriptionCounter" class="form-help" aria-live="polite">
+                    0/5000 characters
+                </small>
 
                 <small class="form-help">
                     Please provide enough information to help barangay
                     personnel understand your concern.
                 </small>
+
+                @error('concern_text')
+                    <small class="field-error">{{ $message }}</small>
+                @enderror
 
             </div>
 
@@ -219,3 +253,57 @@
 </div>
 
 @endsection
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    const requestForm = document.getElementById('requestForm');
+
+    if (requestForm) {
+        requestForm.addEventListener('submit', function (event) {
+            const confirmed = confirm(
+                'Are you sure you want to submit this request?'
+            );
+
+            if (!confirmed) {
+                event.preventDefault();
+            }
+        });
+    }
+
+    const counters = [
+        {
+            input: document.getElementById('subject'),
+            counter: document.getElementById('subjectCounter'),
+            limit: 255
+        },
+        {
+            input: document.getElementById('description'),
+            counter: document.getElementById('descriptionCounter'),
+            limit: 5000
+        }
+    ];
+
+    counters.forEach(function (item) {
+        if (!item.input || !item.counter) return;
+
+        function updateCounter() {
+            const count = item.input.value.length;
+
+            item.counter.textContent =
+                `${count}/${item.limit} characters`;
+
+            item.counter.style.color =
+                count >= item.limit ? '#B42318' : '';
+
+            item.counter.style.fontWeight =
+                count >= item.limit ? '600' : '';
+        }
+
+        item.input.addEventListener('input', updateCounter);
+        updateCounter();
+    });
+});
+</script>
+@endpush

@@ -52,13 +52,6 @@
             </p>
         </div>
 
-        <a
-            href="{{ url('/citizen/submit-request') }}"
-            class="history-submit-button"
-        >
-            + Submit Concern
-        </a>
-
     </div>
 
 

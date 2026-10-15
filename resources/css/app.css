@@ -880,6 +880,55 @@ padding: 20px;
 
 }
 
+/* VALIDATION NOTICE */
+
+.validation-notice {
+    margin-bottom: 20px;
+    padding: 14px 16px;
+    color: #912018;
+    background: #FEF3F2;
+    border: 1px solid #FDA29B;
+    border-radius: 8px;
+}
+
+.validation-notice strong {
+    display: block;
+    margin-bottom: 6px;
+    color: #B42318;
+}
+
+.validation-notice ul {
+    margin: 0;
+    padding-left: 22px;
+}
+
+.validation-notice li {
+    margin-top: 4px;
+}
+
+
+/* SUBMIT REQUEST VALIDATION */
+
+.field-error {
+    display: block;
+    margin-top: 6px;
+    color: #B42318;
+    font-size: 0.875rem;
+}
+
+.is-invalid {
+    border-color: #B42318 !important;
+    background-color: #FEF3F2;
+}
+
+#subjectCounter,
+#descriptionCounter {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.875rem;
+}
+
+
 /* ========================================
    TRACK REQUEST PAGE
    ======================================== */
