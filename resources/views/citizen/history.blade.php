@@ -8,61 +8,76 @@
 
 <div class="history-page">
 
-    <!-- PAGE HEADER -->
-    <div class="history-header">
-        <h1>Request History</h1>
+<!-- PAGE HEADER -->
+<div class="history-header">
+    <h1>Request History</h1>
 
-        <p>
-            View your previous barangay service requests and their current status.
-        </p>
+    <p>
+        View your previous barangay service requests and their current status.
+    </p>
+</div>
+
+
+<!-- HISTORY SUMMARY -->
+<div class="history-summary">
+
+    <div class="history-summary-item">
+        <span>Total Requests</span>
+        <strong>{{ $requests->count() }}</strong>
+    </div>
+
+    <div class="history-summary-item">
+        <span>Under Review</span>
+        <strong>{{ $requests->where('status', 'Under Review')->count() }}</strong>
+    </div>
+
+    <div class="history-summary-item">
+        <span>Resolved</span>
+        <strong>{{ $requests->where('status', 'Resolved')->count() }}</strong>
+    </div>
+
+</div>
+
+
+<!-- REQUEST HISTORY -->
+<div class="history-card">
+
+    <div class="history-card-header">
+
+        <div>
+            <h2>Your Requests</h2>
+
+            <p>
+                A record of your submitted barangay concerns.
+            </p>
+        </div>
+
+        <a
+            href="{{ url('/citizen/submit-request') }}"
+            class="history-submit-button"
+        >
+            + Submit Concern
+        </a>
+
     </div>
 
 
-    <!-- HISTORY SUMMARY -->
-    <div class="history-summary">
+    <div class="history-table-wrapper">
 
-        <div class="history-summary-item">
-            <span>Total Requests</span>
-            <strong>3</strong>
-        </div>
+        @if ($requests->isEmpty())
 
-        <div class="history-summary-item">
-            <span>Under Review</span>
-            <strong>1</strong>
-        </div>
+            <div class="history-empty-state">
+                <p>You have not submitted any concerns yet.</p>
 
-        <div class="history-summary-item">
-            <span>Resolved</span>
-            <strong>1</strong>
-        </div>
-
-    </div>
-
-
-    <!-- REQUEST HISTORY -->
-    <div class="history-card">
-
-        <div class="history-card-header">
-
-            <div>
-                <h2>Your Requests</h2>
-
-                <p>
-                    A record of your submitted barangay concerns.
-                </p>
+                <a
+                    href="{{ url('/citizen/submit-request') }}"
+                    class="history-submit-button"
+                >
+                    Submit Your First Concern
+                </a>
             </div>
 
-            <a
-                href="{{ url('/citizen/submit-request') }}"
-                class="history-submit-button"
-            >
-                + Submit Concern
-            </a>
-
-        </div>
-
-
-        <div class="history-table-wrapper">
+        @else
 
             <table class="history-table">
 
@@ -78,87 +93,58 @@
 
                 <tbody>
 
-                    <tr>
-                        <td>
-                            <strong>REQ-001</strong>
-                        </td>
+                    @foreach ($requests as $request)
 
-                        <td>
-                            Street Light
-                        </td>
+                        <tr>
 
-                        <td>
-                            Infrastructure
-                        </td>
+                            <td>
+                                <strong>
+                                    {{ $request->reference_number ?? 'REQ-' . $request->id }}
+                                </strong>
+                            </td>
 
-                        <td>
-                            September 28, 2026
-                        </td>
+                            <td>
+                                {{ $request->concern_text }}
+                            </td>
 
-                        <td>
-                            <span class="history-status history-status-pending">
-                                Pending
-                            </span>
-                        </td>
-                    </tr>
+                            <td>
+                                {{ $request->category ?? '—' }}
+                            </td>
 
+                            <td>
+                                {{ $request->created_at->format('F j, Y') }}
+                            </td>
 
-                    <tr>
-                        <td>
-                            <strong>REQ-002</strong>
-                        </td>
+                            <td>
 
-                        <td>
-                            Garbage Collection
-                        </td>
+                                @php
+                                    $statusClass = match ($request->status) {
+                                        'Pending' => 'history-status-pending',
+                                        'Under Review' => 'history-status-review',
+                                        'Resolved' => 'history-status-resolved',
+                                        default => 'history-status-review',
+                                    };
+                                @endphp
 
-                        <td>
-                            Sanitation
-                        </td>
+                                <span class="history-status {{ $statusClass }}">
+                                    {{ $request->status }}
+                                </span>
 
-                        <td>
-                            September 27, 2026
-                        </td>
+                            </td>
 
-                        <td>
-                            <span class="history-status history-status-review">
-                                Under Review
-                            </span>
-                        </td>
-                    </tr>
+                        </tr>
 
-
-                    <tr>
-                        <td>
-                            <strong>REQ-003</strong>
-                        </td>
-
-                        <td>
-                            Barangay Clearance
-                        </td>
-
-                        <td>
-                            Barangay Documents
-                        </td>
-
-                        <td>
-                            September 25, 2026
-                        </td>
-
-                        <td>
-                            <span class="history-status history-status-resolved">
-                                Resolved
-                            </span>
-                        </td>
-                    </tr>
+                    @endforeach
 
                 </tbody>
 
             </table>
 
-        </div>
+        @endif
 
     </div>
+
+</div>
 
 </div>
 
