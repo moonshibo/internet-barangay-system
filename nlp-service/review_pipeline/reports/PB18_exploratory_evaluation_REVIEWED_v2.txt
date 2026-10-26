@@ -1,0 +1,64 @@
+PB-18 EXPLORATORY EVALUATION REPORT
+Status: PROVISIONAL; labels have not been approved.
+
+Input: C:\Users\marc\internet-barangay-system\nlp-service\review_pipeline\data\IntRENEt_concern_dataset_v0.2_preprocessed_REVIEWED.csv
+Candidate examples: 42
+Unique respondents: 14
+Review-status counts: {'needs_review': 42}
+All candidate labels approved: False
+
+Evaluation design:
+  Leave-One-Group-Out cross-validation by respondent_id
+  Each fold fits a fresh TF-IDF + MultinomialNB pipeline
+  TF-IDF: ngram_range=(1, 2), min_df=1, lowercase=False, sublinear_tf=True
+  No hyperparameter tuning performed
+
+Exploratory accuracy: 0.571
+Majority-class baseline accuracy: 0.333
+Majority baseline: each fold predicts its training-set majority category
+
+Classification report:
+                         precision    recall  f1-score   support
+
+    Barangay Assistance      1.000     0.889     0.941         9
+      Community Concern      0.000     0.000     0.000         9
+        Noise Complaint      0.750     0.300     0.429        10
+Peace and Order Concern      0.433     0.929     0.591        14
+
+               accuracy                          0.571        42
+              macro avg      0.546     0.529     0.490        42
+           weighted avg      0.537     0.571     0.501        42
+
+Confusion matrix (rows=actual, columns=predicted):
+Labels: Barangay Assistance | Community Concern | Noise Complaint | Peace and Order Concern
+Barangay Assistance: 8 | 0 | 0 | 1
+Community Concern: 0 | 0 | 0 | 9
+Noise Complaint: 0 | 0 | 3 | 7
+Peace and Order Concern: 0 | 0 | 1 | 13
+
+Fold summaries:
+Fold 1: held-out respondent(s) R01; train=38, test=4
+Fold 2: held-out respondent(s) R02; train=38, test=4
+Fold 3: held-out respondent(s) R04; train=40, test=2
+Fold 4: held-out respondent(s) R05; train=38, test=4
+Fold 5: held-out respondent(s) R06; train=38, test=4
+Fold 6: held-out respondent(s) R07; train=38, test=4
+Fold 7: held-out respondent(s) R08; train=38, test=4
+Fold 8: held-out respondent(s) R09; train=38, test=4
+Fold 9: held-out respondent(s) R10; train=39, test=3
+Fold 10: held-out respondent(s) R11; train=41, test=1
+Fold 11: held-out respondent(s) R12; train=41, test=1
+Fold 12: held-out respondent(s) R13; train=39, test=3
+Fold 13: held-out respondent(s) R14; train=39, test=3
+Fold 14: held-out respondent(s) R15; train=41, test=1
+
+Fold category-coverage warnings:
+No held-out category was absent from its training fold.
+
+Limitations:
+- Only 42 candidate examples from 14 respondents.
+- All included labels remain provisional and require human review.
+- Performance estimates may change after label adjudication or new data.
+- Grouping by respondent reduces respondent leakage but does not establish generalization to all residents.
+- The model does not determine whether a report is true or legitimate.
+- This evaluation does not train or deploy a production model.

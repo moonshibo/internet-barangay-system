@@ -1,0 +1,58 @@
+PB-17 TF-IDF EXPLORATORY REPORT
+Status: PROVISIONAL; labels have not been approved.
+
+Input: C:\Users\marc\internet-barangay-system\nlp-service\review_pipeline\data\IntRENEt_concern_dataset_v0.2_preprocessed_REVIEWED.csv
+Candidate rows: 42
+Unique respondents: 14
+TF-IDF matrix shape: 42 rows x 990 features
+Review-status counts: {'needs_review': 42}
+
+Candidate counts by category:
+  Peace and Order Concern: 14
+  Noise Complaint: 10
+  Community Concern: 9
+  Barangay Assistance: 9
+
+Vectorizer configuration:
+  ngram_range=(1, 2)
+  min_df=1
+  lowercase=False
+  sublinear_tf=True
+
+First 30 vocabulary terms (alphabetical feature order):
+  10
+  10 30
+  10 pm
+  10pm
+  10pm na
+  30
+  30 na
+  aamok
+  aamok ng
+  aaway
+  aaway ang
+  aaway at
+  aaway away
+  aaway dito
+  aaway na
+  abot
+  abot pa
+  action
+  action as
+  action na
+  action salamat
+  after
+  after past
+  agad
+  agad dito
+  against
+  against sa
+  aid
+  aid para
+  ako
+
+Limitations:
+- This is exploratory feature extraction, not model training or deployment.
+- All included labels remain provisional and require human review.
+- TF-IDF features do not establish the truth or legitimacy of a concern.
+- Small dataset; results must not be treated as production performance.

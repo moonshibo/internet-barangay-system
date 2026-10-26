@@ -25,3 +25,8 @@ _ide_helper.php
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# Generated Python and exploratory NLP artifacts
+__pycache__/
+nlp-service/artifacts/
+nlp-service/review_pipeline/artifacts/

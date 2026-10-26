@@ -1,0 +1,47 @@
+PB-18 Exploratory Evaluation Report
+=============================================
+
+STATUS: EXPLORATORY / PROVISIONAL
+All current candidate labels are unapproved. These metrics are not validated model performance and must not be used as final accuracy claims.
+
+Source: C:\Users\marc\internet-barangay-system\nlp-service\data\IntRENEt_concern_dataset_v0.2_preprocessed.csv
+Candidate rows evaluated: 45
+Unique respondents: 14
+Cross-validation: Leave-One-Respondent-Out
+Pipeline: TF-IDF (unigrams+bigrams) + MultinomialNB
+TF-IDF fitted separately inside every training fold.
+
+Review-status counts:
+review_status
+needs_review    45
+
+Exploratory accuracy: 0.733
+Majority-class baseline accuracy: 0.222
+
+Per-class metrics:
+                         precision    recall  f1-score   support
+
+    Barangay Assistance      1.000     0.889     0.941         9
+      Community Concern      0.647     0.846     0.733        13
+        Noise Complaint      0.750     0.300     0.429        10
+Peace and Order Concern      0.688     0.846     0.759        13
+
+               accuracy                          0.733        45
+              macro avg      0.771     0.720     0.715        45
+           weighted avg      0.752     0.733     0.714        45
+
+Confusion matrix (rows=true, columns=predicted):
+                         Barangay Assistance  Community Concern  Noise Complaint  Peace and Order Concern
+Barangay Assistance                        8                  1                0                        0
+Community Concern                          0                 11                0                        2
+Noise Complaint                            0                  4                3                        3
+Peace and Order Concern                    0                  1                1                       11
+
+Fold coverage warnings:
+No held-out category was absent from its training fold.
+
+Limitations:
+- Small dataset with only 45 candidate examples.
+- All labels remain unapproved.
+- Results are exploratory and may change after label review.
+- They do not establish report legitimacy or incident truth.

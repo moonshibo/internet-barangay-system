@@ -1,0 +1,34 @@
+PB-17 TF-IDF Feature Extraction Report
+=======================================================
+
+STATUS: EXPLORATORY / PROVISIONAL
+This fit does not validate labels or establish model performance.
+For PB-18 evaluation, refit TF-IDF inside each training fold.
+
+Source: C:\Users\marc\internet-barangay-system\nlp-service\data\IntRENEt_concern_dataset_v0.2_preprocessed.csv
+Candidate rows fitted: 45
+Vocabulary size: 994
+Feature matrix shape: 45 rows x 994 features
+
+TF-IDF settings:
+  ngram_range=(1, 2)
+  min_df=1
+  lowercase=False (PB-16 text is already lowercased)
+  sublinear_tf=True
+  stopword removal: none; team decision pending
+
+Candidate review-status counts:
+  needs_review: 45
+
+Category counts (candidate labels, not approved labels):
+  Peace and Order Concern: 13
+  Community Concern: 13
+  Noise Complaint: 10
+  Barangay Assistance: 9
+
+Rows with a duplicate-group value: 9
+
+Limitation: category counts and features reflect the current candidate dataset. Label review and duplicate handling remain unresolved. Do not treat this fit as final evaluation.
+
+First 30 vocabulary terms (alphabetical):
+  10, 10 30, 10 pm, 10pm, 10pm na, 30, 30 na, aamok, aamok ng, aaway, aaway ang, aaway at, aaway away, aaway dito, aaway na, abot, abot pa, action, action as, action na, action salamat, after, after past, agad, agad dito, against, against sa, aid, aid para, ako

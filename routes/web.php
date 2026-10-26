@@ -11,7 +11,9 @@ use Illuminate\Support\Facades\Route;
 | Public Routes
 |--------------------------------------------------------------------------
 */
+Route::view('/submit-request', 'citizen.guest-submit-request');
 
+Route::post('/submit-request', [RequestController::class, 'storeGuest']);
 Route::get('/', function () {
     return view('welcome');
 });
