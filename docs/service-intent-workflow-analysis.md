@@ -1,9 +1,9 @@
 # PB-20 — Service Intent and Workflow Analysis
 
-**Project:** IntRENEt (Internet Barangay System)  
-**Sprint:** Sprint 3 — October 19–November 1, 2026  
-**Owner:** Starween  
-**Status:** Draft for review  
+**Project:** IntRENEt (Internet Barangay System)
+**Sprint:** Sprint 3 — October 19–November 1, 2026
+**Owner:** Starween
+**Status:** Draft for review
 **Related tasks:** PB-11 — API Contract; PB-21 — Service Knowledge Base and Checklist; PB-22 — Abuse-Screening Requirements; PB-23 — Chatbot Conversation Design and AI Orchestrator; PB-24 — Data Model
 
 ## 1. Purpose
