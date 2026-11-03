@@ -26,7 +26,12 @@
 
     <div class="request-form-card">
 
-        <form id="requestForm">
+        <form
+            id="requestForm"
+            method="POST"
+            action="{{ url('/citizen/submit-request') }}"
+        >
+            @csrf
 
             <!-- REQUEST TYPE -->
 
@@ -38,7 +43,7 @@
 
                 <select
                     id="requestType"
-                    name="requestType"
+                    name="category"
                     required
                 >
 
@@ -104,7 +109,7 @@
 
                 <textarea
                     id="description"
-                    name="description"
+                    name="concern_text"
                     rows="6"
                     placeholder="Describe your concern in detail..."
                     required

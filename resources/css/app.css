@@ -1512,6 +1512,18 @@ padding: 20px;
 
 }
 
+
+.history-empty-state {
+    padding: 32px 20px;
+    text-align: center;
+    color: #666;
+}
+
+.history-empty-state p {
+    margin-bottom: 16px;
+}
+
+
 /* =========================================
 PERSONNEL DASHBOARD
 ========================================= */
