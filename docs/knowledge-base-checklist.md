@@ -233,6 +233,37 @@ The following must be established for each applicable service:
 - Which information requires restricted staff access.
 - Which approved contact or referral route may be provided to citizens.
 
+### 5.4 Service-Navigation Dataset Mapping to PB-20 Conversation Intents
+
+The following seven records were identified in the service-navigation portion of the citizen survey dataset. These records represent questions about where to ask for information, which office or personnel to approach, or where to obtain assistance.
+
+They are conversation-level service-navigation examples, not concern-classification training records. They remain excluded from the concern-classification baseline and must not be assigned a concern category solely because the citizen uses the word "concern."
+
+| Dataset ID | Citizen's Main Request | PB-20 Conversation Intent | Routing Interpretation |
+|---|---|---|---|
+| C0063 | Ask which office handles inquiries about Barangay sports events | Service or document inquiry | Direct the citizen to verified sports-event or general service information, or an approved referral. |
+| C0067 | Ask which window or counter handles Barangay inquiries | Service or document inquiry | Provide verified office or inquiry-counter information when available. |
+| C0068 | Ask whom to approach about a Barangay service | Service or document inquiry | Identify the relevant service and provide verified office or personnel information when available. |
+| C0070 | Ask which office or personnel handles a Barangay service concern | Service or document inquiry | Clarify the service involved and provide verified navigation information. |
+| C0071 | Ask whom to approach for assistance for a person with a disability (PWD) | Assistance inquiry | Identify available, verified assistance information or an authorized referral. Do not assume eligibility or promise assistance. |
+| C0073 | Ask whom to approach about a Barangay service | Service or document inquiry | Same wording as C0068; retain its existing duplicate/near-duplicate review treatment. |
+| C0076 | Ask which office or personnel handles a Barangay service concern | Service or document inquiry | Clarify the service involved and provide verified navigation information. |
+
+**Routing and Classification Rules**
+
+1. General questions about which office, window, or personnel handles a Barangay service are routed as **Service or document inquiry** under PB-20.
+2. Questions about where to obtain financial, social, disability-related, or other Barangay assistance are routed as **Assistance inquiry** when the citizen is asking for information rather than submitting a request for aid.
+3. Questions specifically asking how to file or submit a community concern are routed as **Reporting-process inquiry**.
+4. If the citizen proceeds to submit an actual community concern or assistance request, the applicable PB-20 submission workflow applies. Concern classification is invoked only when the applicable request is submitted, following the agreed Laravel save-first process.
+5. These navigation records remain outside the concern-classification baseline. They are examples for conversation-intent recognition and service navigation, not additional concern categories.
+6. Office assignments, personnel names, contact details, service availability, and referral instructions must only be presented as confirmed when supported by verified Barangay information.
+
+**Terminology Clarification**
+
+"General Service Inquiry" and "Reporting-Process Inquiry" in the PB-21 knowledge-base inventory describe knowledge-base information or inquiry topics. They do not introduce additional PB-20 conversation intents. For routing, general office/service-navigation questions map to **Service or document inquiry**, while questions about how to submit a concern map to **Reporting-process inquiry**.
+
+The seven records retain their existing `service_navigation` designation and `include_in_baseline=N` status.
+
 ## 6. Verification and Approval Rules
 
 ### 6.1 Acceptable Information Sources
