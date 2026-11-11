@@ -56,41 +56,22 @@
                     Concern Category
                 </label>
 
-                <select
-                    id="requestType"
-                    name="category"
-                    required
-                >
-
-                    <option value="">
-                        Select a concern category
-                    </option>
-
-                    <option value="infrastructure">
-                        Infrastructure
-                    </option>
-
-                    <option value="sanitation">
-                        Sanitation
-                    </option>
-
-                    <option value="health">
-                        Health
-                    </option>
-
-                    <option value="public-safety">
-                        Public Safety
-                    </option>
-
-                    <option value="documents">
-                        Barangay Documents
-                    </option>
-
-                    <option value="other">
-                        Other
-                    </option>
-
+                <select id="requestType" name="category" required>
+                    <option value="">Select a concern category</option>
+                    @foreach (config('request_categories') as $value => $label)
+                        <option value="{{ $value }}" @selected(old('category') === $value)>
+                            {{ $label }}
+                        </option>
+                    @endforeach
                 </select>
+
+                <small class="form-help">
+                    Choose the closest match. Barangay personnel will review and confirm the final category.
+                </small>
+
+                @error('category')
+                    <small class="field-error">{{ $message }}</small>
+                @enderror
 
             </div>
 

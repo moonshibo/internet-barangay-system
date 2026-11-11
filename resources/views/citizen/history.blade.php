@@ -101,7 +101,9 @@
                             </td>
 
                             <td>
-                                {{ $request->category ?? '—' }}
+                                {{ $request->category
+                                    ? config('request_categories.' . $request->category, ucwords(str_replace('-', ' ', $request->category)))
+                                    : '—' }}
                             </td>
 
                             <td>

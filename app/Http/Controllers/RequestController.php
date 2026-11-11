@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Request;
 use Illuminate\Http\Request as HttpRequest;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class RequestController extends Controller
 {
@@ -14,7 +15,7 @@ class RequestController extends Controller
             'category' => [
                 'required',
                 'string',
-                'in:infrastructure,sanitation,health,public-safety,documents,other',
+                Rule::in(array_keys(config('request_categories'))),
             ],
             'subject' => ['required', 'string', 'max:255'],
             'concern_text' => ['required', 'string', 'max:5000'],

@@ -102,7 +102,9 @@
                 <div class="status-detail">
                     <span>Category</span>
                     <strong>
-                        {{ ucwords(str_replace('-', ' ', $trackedRequest->category ?? 'General')) }}
+                        {{ $trackedRequest->category
+                            ? config('request_categories.' . $trackedRequest->category, ucwords(str_replace('-', ' ', $trackedRequest->category)))
+                            : 'General' }}
                     </strong>
                 </div>
 
