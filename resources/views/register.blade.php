@@ -1,6 +1,6 @@
 @extends('layouts.auth')
 
-@section('title', 'Register | IntRENET')
+@section('title', 'Register | IntRENEt')
 
 @section('content')
 
@@ -19,7 +19,7 @@
 
                 <div>
                     <div class="brand-name">
-                        IntRENET
+                        IntRENEt
                     </div>
 
                     <div class="brand-subtitle">
@@ -35,7 +35,7 @@
                 <h1>Mabuhay!</h1>
 
                 <p>
-                    Create your IntRENET account and easily submit,
+                    Create your IntRENEt account and easily submit,
                     monitor, and track your concerns through your
                     barangay's online service portal.
                 </p>
