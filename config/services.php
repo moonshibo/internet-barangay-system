@@ -34,5 +34,9 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
+    'nlp' => [
+        'url' => env('NLP_SERVICE_URL', 'http://127.0.0.1:5000/classify'),
+        'timeout' => (int) env('NLP_SERVICE_TIMEOUT', 5),
 
+    ],
 ];
